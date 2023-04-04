@@ -1,15 +1,15 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "DataKit",
     platforms: [
-      .macOS(.v10_12), .iOS(.v9), .tvOS(.v9), .watchOS(.v3)
+        .iOS(.v13), .macOS(.v12), .tvOS(.v13), .watchOS(.v8)
     ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "DataKit",
+            type: .dynamic,
             targets: ["DataKit"]
         ),
         .executable(
@@ -18,8 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/Quick/Nimble", "9.0.0" ..< "10.0.0")
+        .package(url: "https://github.com/Quick/Nimble", from: "9.2.0"),
     ],
     targets: [
         .target(
@@ -30,10 +29,9 @@ let package = Package(
             name: "DataKitTests",
             dependencies: ["DataKit", "Nimble"]
         ),
-        .target(
+        .executableTarget(
             name: "DataKitBenchmark",
             dependencies: ["DataKit"]
         )
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )
